@@ -200,6 +200,12 @@ var ageBlocksWithPerlinNoise = (pos1, pos2, blocks, targetBlocks = null,
 };
 
 
+/* ----- World Callback ----- */
+tick = (ms) => {
+    processQueue();
+};
+
+
 /*
  Example:
 
