@@ -104,7 +104,7 @@ var async = {
 };
 
 var builderHelper = {
-    line: (pos1, pos2, blockType = "White Wool") => {
+    line: (pos1, pos2, blockType = "White Wool", delay = 50) => {
         const [x1, y1, z1] = pos1;
         const [x2, y2, z2] = pos2;
 
@@ -129,10 +129,10 @@ var builderHelper = {
             if (i > maxStep) {
                 async.clearIntervalLoop(loopId);
             }
-        }, 10);
+        }, delay);
     },
 
-    sphere: (center, radius, blockName = "Black Glass", isHollow = true, perTick = 6000, delay = 200) => {
+    sphere: (center, radius, blockName = "Black Glass", isHollow = true, perTick = 5000, delay = 100) => {
         const [cx, cy, cz] = center;
         const rSq = radius * radius;
         const side = 2 * radius + 1;
@@ -177,7 +177,7 @@ var builderHelper = {
         return loopId;
     },
 
-    ageBlocks: (pos1, pos2, blocks, targetBlocks = null, density = 0.4, interval = 100) => {
+    ageBlocks: (pos1, pos2, blocks, targetBlocks = null, chunkSize = 30, density = 0.4, interval = 100) => {
         const [minX, minY, minZ] =
             [Math.min(pos1[0], pos2[0]), Math.min(pos1[1], pos2[1]), Math.min(pos1[2], pos2[2])];
         const [maxX, maxY, maxZ] =
@@ -191,11 +191,11 @@ var builderHelper = {
         const timerId = async.setIntervalLoop(() => {
             if (!active) return;
 
-            for (let dx = 0; dx < 5; dx++) {
+            for (let dx = 0; dx < chunkSize; dx++) {
                 const currentX = x + dx;
                 if (currentX > maxX) continue;
 
-                for (let dz = 0; dz < 5; dz++) {
+                for (let dz = 0; dz < chunkSize; dz++) {
                     const currentZ = z + dz;
                     if (currentZ > maxZ) continue;
 
@@ -211,10 +211,10 @@ var builderHelper = {
                 }
             }
 
-            x += 5;
+            x += chunkSize;
             if (x > maxX) {
                 x = minX;
-                z += 5;
+                z += chunkSize;
             }
 
             if (z > maxZ) {
