@@ -91,7 +91,7 @@ const processQueue = () => {
  * @param {number}   [interval = 100]      - 每次处理的间隔(ms)
  * @returns {{ stop: Function }}           - 调用 .stop() 可提前中断
  */
-var ageBlocks = (pos1, pos2, blocks, targetBlocks = null, density = 0.4, interval = 100) => {
+var ageBlocks = (pos1, pos2, blocks, targetBlocks = null, density = 0.4, cubeLength = 20, interval = 100) => {
     const [minX, minY, minZ] =
         [Math.min(pos1[0], pos2[0]), Math.min(pos1[1], pos2[1]), Math.min(pos1[2], pos2[2])];
     const [maxX, maxY, maxZ] =
@@ -105,11 +105,11 @@ var ageBlocks = (pos1, pos2, blocks, targetBlocks = null, density = 0.4, interva
     const timerId = async.setIntervalLoop(() => {
         if (!active) return;
 
-        for (let dx = 0; dx < 5; dx++) {
+        for (let dx = 0; dx < cubeLength; dx++) {
             const currentX = x + dx;
             if (currentX > maxX) continue;
 
-            for (let dz = 0; dz < 5; dz++) {
+            for (let dz = 0; dz < cubeLength; dz++) {
                 const currentZ = z + dz;
                 if (currentZ > maxZ) continue;
 
@@ -125,10 +125,10 @@ var ageBlocks = (pos1, pos2, blocks, targetBlocks = null, density = 0.4, interva
             }
         }
 
-        x += 5;
+        x += cubeLength;
         if (x > maxX) {
             x = minX;
-            z += 5;
+            z += cubeLength;
         }
 
         if (z > maxZ) {
