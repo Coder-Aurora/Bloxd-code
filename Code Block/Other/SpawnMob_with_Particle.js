@@ -1,19 +1,18 @@
-const [dx, dy, dz] = [0.5, 9.5, 1];
 const [x, y, z] = thisPos;
 
 api.playParticleEffect({
     dir1: [0, 0, 0],
     dir2: [0, 0, 0],
-    pos1: [x + 1.5 + dx, y + 20 + dy, z + 1.5 + dz],
-    pos2: [x - 1.5 + dx, y + dy, z - 1.5 + dz],
+    pos1: [x + 1, y + 30, z + 2.5],
+    pos2: [x - 1, y + 30, z - 0.5],
     texture: 'glint',
-    minLifeTime: 1,
-    maxLifeTime: 0.6,
+    minLifeTime: 3,
+    maxLifeTime: 3.5,
     minEmitPower: 1,
     maxEmitPower: 13,
     minSize: 0.25,
     maxSize: 1.5,
-    manualEmitCount: 900,
+    manualEmitCount: 400,
     gravity: [0, -100, 0],
     colorGradients: [{
         timeFraction: 0,
@@ -25,22 +24,22 @@ api.playParticleEffect({
         factor: 0.1,
         factor2: 1,
     }],
-    blendMode: 0,
+    blendMode: 4,
 });
 
 api.playParticleEffect({
     dir1: [5, 2, 5],
     dir2: [-5, 0, -5],
-    pos1: [x + 0.5 + dx, y + dy, z + dz],
-    pos2: [x - 0.5 + dx, y + dy, z + dz],
+    pos1: [x + 1, y + 35, z + 1],
+    pos2: [x, y + 30, z + 1],
     texture: 'drift',
-    minLifeTime: 1,
-    maxLifeTime: 0.6,
-    minEmitPower: 1,
+    minLifeTime: 3,
+    maxLifeTime: 3.5,
+    minEmitPower: 0.1,
     maxEmitPower: 13,
     minSize: 0.25,
     maxSize: 1.5,
-    manualEmitCount: 300,
+    manualEmitCount: 5000,
     gravity: [0, 0, 0],
     colorGradients: [{
         timeFraction: 0,
@@ -52,7 +51,7 @@ api.playParticleEffect({
         factor: 0.1,
         factor2: 1,
     }],
-    blendMode: 0,
+    blendMode: 4,
 });
 
-api.attemptSpawnMob('Draugr Warper', x + dx, y + dy, z + dz);
+api.attemptSpawnMob("Draugr Warper", x + 0.5, y + 23, z + 0.5);
